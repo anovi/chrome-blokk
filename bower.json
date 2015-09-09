@@ -1,0 +1,9 @@
+{
+  "name": "chrome-blokk",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "mocha": "~2.3.1"
+  }
+}
