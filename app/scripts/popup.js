@@ -14,7 +14,8 @@ blokkForm.addEventListener('submit', function(event) {
 	  chrome.tabs.sendMessage(tabs[0].id, {
 	  	blurImg: blurImg.checked,
 	  	fontOpacity: fontOpacity.value,
-	  	inputsOpt: inputsOpt.value
+	  	inputsOpt: inputsOpt.value,
+	  	path: chrome.extension.getURL('')
 	  }, function(response) {
 	    console.log(response.farewell);
 	  });

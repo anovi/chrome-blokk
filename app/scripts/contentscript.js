@@ -6,13 +6,14 @@
 */
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-    console.log(request);
+    // console.log(request);
+    addFont(request.path);
 
     // Getl all text nodes
-    var textNodes = getTextNodesUnder(document.documentElement), val, textNode, color, images, bgImages, styles, inputs, attr;
+    var textNodes = getTextNodesUnder(document.body), val, textNode, color, images, bgImages, styles, inputs, attr;
 
     for (var i = textNodes.length - 1; i >= 0; i--) {
-      if (textNodes[i].parentNode.tagName !== 'SCRIPT') {
+      if (textNodes[i].parentNode.tagName !== 'SCRIPT' && textNodes[i].parentNode.tagName !== 'STYLE') {
         textNode = textNodes[i];
         val = textNode.nodeValue;
 
@@ -25,7 +26,7 @@ chrome.runtime.onMessage.addListener(
           return p1 + 'a' + p2 + p3 + ', ' + request.fontOpacity + p4;
         });
         styles = '' +
-        'font-family:'            + 'Blokk;' +
+        'font-family:'            + 'BLOKKRegular;' +
         'font-weight:'            + 'normal;' +
         '-webkit-font-smoothing:' + 'antialiased;' +
         'letter-spacing:'         + '0;' +
@@ -135,4 +136,15 @@ function getRandomLetter() {
 
 function getImages() {
   return document.getElementsByTagName('img');
+}
+
+
+function addFont(path) {
+  var head = document.head || document.getElementsByTagName('head')[0],
+      link = document.createElement('link');
+
+  link.rel = "stylesheet";
+  link.href = path + "fonts/style.css";
+
+  head.appendChild(link);
 }
