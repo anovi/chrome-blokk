@@ -1,10 +1,10 @@
 {
   "appName": {
     "message": "Chrome Blokk",
-    "description": "Apply BLOKK font to all text nodes on a page"
+    "description": "Apply BLOKK font to all text nodes on current page"
   },
   "appDescription": {
     "message": "Apply BLOKK font to all text nodes on a page",
-    "description": "Extension uses BLOKK font (blokkfont.com) and apply it to all text nodes on page. Reload the page to reset changes"
+    "description": "Extension uses BLOKK font (blokkfont.com) and apply it to all text nodes on current page. Reload the page to reset changes"
   }
 }
