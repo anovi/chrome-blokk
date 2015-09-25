@@ -6,19 +6,19 @@
 */
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-    // console.log(request);
-    addFont(request.path);
+    injectFont(request.path);
 
     // Getl all text nodes
-    var textNodes = getTextNodesUnder(document.body), val, textNode, color, images, bgImages, styles, inputs, attr;
+    var textNodes = getTextNodesUnder(document.body), val, textNode, color, images, bgImages, styles, inputs, attr, initialStyle;
 
+    /* Add styles to text nodes */
     for (var i = textNodes.length - 1; i >= 0; i--) {
       if (textNodes[i].parentNode.tagName !== 'SCRIPT' && textNodes[i].parentNode.tagName !== 'STYLE') {
         textNode = textNodes[i];
         val = textNode.nodeValue;
 
         // Replace cyrrilic symbols to random latin
-        textNodes[i].nodeValue = replaceCyrrilic(val);
+        textNodes[i].nodeValue = replaceCyrillic(val);
 
         // Set font and other styles to the node
         color = window.getComputedStyle(textNode.parentNode).color;
@@ -31,9 +31,13 @@ chrome.runtime.onMessage.addListener(
         '-webkit-font-smoothing:' + 'antialiased;' +
         'letter-spacing:'         + '0;' +
         'color:'                  +  color + '!important;' +
-        'text-shadow:'            + 'none';
+        'text-shadow:'            + 'none;';
 
-        textNode.parentNode.setAttribute('style', styles);
+        initialStyle = textNode.parentNode.getAttribute('style');
+        if (initialStyle && initialStyle.search(/;\s*$/) === -1) {
+          initialStyle = initialStyle.replace(/\s*$/, '; ');
+        }
+        textNode.parentNode.setAttribute('style', (initialStyle||'') + styles);
       }
     };
 
@@ -48,7 +52,7 @@ chrome.runtime.onMessage.addListener(
           'letter-spacing:'         + '0;';
         for (var i = inputs.length - 1; i >= 0; i--) {
           attr = inputs[i].getAttribute('placeholder');
-          inputs[i].setAttribute('placeholder', replaceCyrrilic(attr));
+          inputs[i].setAttribute('placeholder', replaceCyrillic(attr));
           inputs[i].setAttribute('style', styles);
         }
       } else {
@@ -115,7 +119,7 @@ function getBgNodesUnder(el){
 }
 
 
-function replaceCyrrilic (str) {
+function replaceCyrillic (str) {
   if (!str) return;
   return str.replace(/[а-я]|ё/gi, function (match) {
     var character = getRandomLetter();
@@ -139,7 +143,7 @@ function getImages() {
 }
 
 
-function addFont(path) {
+function injectFont(path) {
   var head = document.head || document.getElementsByTagName('head')[0],
       link = document.createElement('link');
 
