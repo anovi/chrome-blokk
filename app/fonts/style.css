@@ -1,9 +1,6 @@
 @font-face {
   font-family: 'BLOKKRegular';
-  src: url('chrome-extension://__MSG_@@extension_id__/fonts/BLOKKRegular.eot');
-  src: url('chrome-extension://__MSG_@@extension_id__/fonts/BLOKKRegular.eot?#iefix') format('embedded-opentype'),
-       url('chrome-extension://__MSG_@@extension_id__/fonts/BLOKKRegular.woff') format('woff'),
-       url('chrome-extension://__MSG_@@extension_id__/fonts/BLOKKRegular.svg#BLOKKRegular') format('svg');
+  src: url('chrome-extension://__MSG_@@extension_id__/fonts/BLOKKRegular.ttf');
   font-weight: normal;
   font-style: normal;
 }

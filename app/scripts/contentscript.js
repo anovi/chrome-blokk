@@ -42,7 +42,7 @@ chrome.runtime.onMessage.addListener(
       inputs = document.getElementsByTagName('input');
       if (request.inputsOpt === 'blokk') {
         styles = '' +
-          'font-family:'            + 'Blokk;' +
+          'font-family:'            + 'BLOKKRegular;' +
           'font-weight:'            + 'normal;' +
           '-webkit-font-smoothing:' + 'antialiased;' +
           'letter-spacing:'         + '0;';
