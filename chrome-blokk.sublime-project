@@ -7,7 +7,8 @@
 				"node_modules",
 				"dist",
 				"package",
-				".tmp"
+				".tmp",
+				"app/bower_components"
 			],
 			"path": "."
 		}
